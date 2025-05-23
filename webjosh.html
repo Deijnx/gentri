@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <link rel="stylesheet" href="webjosh.css">
+    <link rel="stylesheet" href="loadingscreen.html">
+</head>
+
+<body> 
+    <div class="login-container"> 
+        <img src="logo-new.png" alt="City of General Trias Logo" class="login-logo">
+        <h2>Log In to Your Account</h2>
+        <form id="loginForm" method="post" action="webhome.html">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your full name" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+
+        <footer>
+            <p>Don't have an account? <a href="registration.html" class="register-link">Register Here</a></p>
+        </footer>
+    </div>
+    <script src="webjosh.js"></script>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | City of General Trias</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .govt-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .govt-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 0;
+            color: white;
+        }
+
+        .govt-logo {
+            max-height: 60px;
+        }
+
+        .govt-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .govt-header p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .govt-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .login-card, .register-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .login-header, .register-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .login-header h2, .register-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .login-header p, .register-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .login-form, .register-form {
+            padding: 30px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+        }
+
+        .input-group-text {
+            border-radius: 10px 0 0 10px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-right: none;
+        }
+
+        .input-group .form-control {
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-outline-secondary {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .login-footer, .register-footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .govt-footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+
+        .govt-footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .govt-footer a:hover {
+            color: #45a049;
+        }
+
+        .form-switch {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .form-switch .btn {
+            border-radius: 20px;
+            margin: 0 5px;
+            padding: 8px 20px;
+        }
+
+        .form-switch .btn.active {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .d-none {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="govt-container">
+        <header class="govt-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                        <img src="logo-new.png" 
+                             alt="General Trias Logo" 
+                             class="govt-logo img-fluid">
+                    </div>
+                    <div class="col-md-10">
+                        <h1>CITY OF GENERAL TRIAS</h1>
+                        <p>OFFICIAL GOVERNMENT WEBSITE</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="govt-main">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <!-- Form Switch -->
+                        <div class="form-switch mb-4">
+                            <button type="button" class="btn btn-outline-primary active" id="loginTab">Login</button>
+                            <button type="button" class="btn btn-outline-primary" id="registerTab">Sign Up</button>
+                        </div>
+
+                        <!-- Login Form -->
+                        <div class="login-card" id="loginCard">
+                            <div class="login-header">
+                                <h2><i class="fas fa-user-circle"></i> User Login</h2>
+                                <p>Access government services and information</p>
+                            </div>
+                            
+                            <form id="loginForm" class="login-form">
+                                <div class="alert alert-danger d-none" id="loginErrorMessage"></div>
+                                <div class="alert alert-success d-none" id="loginSuccessMessage"></div>
+                                
+                                <div class="mb-3">
+                                    <label for="loginUsername" class="form-label">Username</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="loginUsername" 
+                                               placeholder="Enter your username" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="loginPassword" 
+                                               placeholder="Enter your password" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleLoginPassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Registration Form -->
+                        <div class="register-card d-none" id="registerCard">
+                            <div class="register-header">
+                                <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+                                <p>Register for government services access</p>
+                            </div>
+                            
+                            <form id="registerForm" class="register-form">
+                                <div class="alert alert-danger d-none" id="registerErrorMessage"></div>
+                                <div class="alert alert-success d-none" id="registerSuccessMessage"></div>
+                                
+                                <div class="mb-3">
+                                    <label for="registerFullName" class="form-label">Full Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="registerFullName" 
+                                               placeholder="Enter your full name" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="registerEmail" class="form-label">Email Address</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="form-control" id="registerEmail" 
+                                               placeholder="Enter your email" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="registerUsername" class="form-label">Username</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="registerUsername" 
+                                               placeholder="Choose a username" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="registerPassword" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="registerPassword" 
+                                               placeholder="Create a password" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleRegisterPassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="confirmPassword" 
+                                               placeholder="Confirm your password" required>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-user-plus"></i> Create Account
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="govt-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2023 City Government of General Trias. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="#">Privacy Policy</a> | 
+                        <a href="#">Terms of Service</a> | 
+                        <a href="#">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const loginTab = document.getElementById('loginTab');
+            const registerTab = document.getElementById('registerTab');
+            const loginCard = document.getElementById('loginCard');
+            const registerCard = document.getElementById('registerCard');
+
+            loginTab.addEventListener('click', function() {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                loginCard.classList.remove('d-none');
+                registerCard.classList.add('d-none');
+            });
+
+            registerTab.addEventListener('click', function() {
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                registerCard.classList.remove('d-none');
+                loginCard.classList.add('d-none');
+            });
+
+            // Password toggle functionality
+            const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+            const loginPassword = document.getElementById('loginPassword');
+            
+            toggleLoginPassword.addEventListener('click', function() {
+                const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                loginPassword.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+
+            const toggleRegisterPassword = document.getElementById('toggleRegisterPassword');
+            const registerPassword = document.getElementById('registerPassword');
+            
+            toggleRegisterPassword.addEventListener('click', function() {
+                const type = registerPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                registerPassword.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+
+            // User Management System
+            class UserManager {
+                constructor() {
+                    this.users = this.loadUsers();
+                }
+
+                loadUsers() {
+                    const savedUsers = localStorage.getItem('registeredUsers');
+                    return savedUsers ? JSON.parse(savedUsers) : [];
+                }
+
+                saveUsers() {
+                    localStorage.setItem('registeredUsers', JSON.stringify(this.users));
+                }
+
+                registerUser(userData) {
+                    // Check if username or email already exists
+                    const existingUser = this.users.find(user => 
+                        user.username === userData.username || user.email === userData.email
+                    );
+
+                    if (existingUser) {
+                        if (existingUser.username === userData.username) {
+                            throw new Error('Username already exists');
+                        } else {
+                            throw new Error('Email already registered');
+                        }
+                    }
+
+                    // Add new user
+                    const newUser = {
+                        id: Date.now(),
+                        fullName: userData.fullName,
+                        email: userData.email,
+                        username: userData.username,
+                        password: userData.password, // In real app, this should be hashed
+                        registeredAt: new Date().toISOString()
+                    };
+
+                    this.users.push(newUser);
+                    this.saveUsers();
+                    return newUser;
+                }
+
+                loginUser(username, password) {
+                    const user = this.users.find(user => 
+                        user.username === username && user.password === password
+                    );
+
+                    if (!user) {
+                        throw new Error('Invalid username or password');
+                    }
+
+                    // Save login session
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        id: user.id,
+                        username: user.username,
+                        fullName: user.fullName,
+                        loginTime: new Date().toISOString()
+                    }));
+
+                    return user;
+                }
+
+                getCurrentUser() {
+                    const currentUser = localStorage.getItem('currentUser');
+                    return currentUser ? JSON.parse(currentUser) : null;
+                }
+
+                logout() {
+                    localStorage.removeItem('currentUser');
+                }
+            }
+
+            const userManager = new UserManager();
+
+            // Registration Form Handler
+            const registerForm = document.getElementById('registerForm');
+            const registerErrorMessage = document.getElementById('registerErrorMessage');
+            const registerSuccessMessage = document.getElementById('registerSuccessMessage');
+
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const fullName = document.getElementById('registerFullName').value.trim();
+                const email = document.getElementById('registerEmail').value.trim();
+                const username = document.getElementById('registerUsername').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                // Validation
+                if (!fullName || !email || !username || !password || !confirmPassword) {
+                    showRegisterError('Please fill in all fields');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    showRegisterError('Passwords do not match');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showRegisterError('Password must be at least 6 characters long');
+                    return;
+                }
+
+                const submitBtn = registerForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    try {
+                        userManager.registerUser({
+                            fullName,
+                            email,
+                            username,
+                            password
+                        });
+
+                        showRegisterSuccess('Account created successfully! You can now log in.');
+                        registerForm.reset();
+                        
+                        // Auto switch to login tab after successful registration
+                        setTimeout(() => {
+                            loginTab.click();
+                            document.getElementById('loginUsername').value = username;
+                        }, 2000);
+
+                    } catch (error) {
+                        showRegisterError(error.message);
+                    } finally {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                }, 1000);
+            });
+
+            // Login Form Handler
+            const loginForm = document.getElementById('loginForm');
+            const loginErrorMessage = document.getElementById('loginErrorMessage');
+            const loginSuccessMessage = document.getElementById('loginSuccessMessage');
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('loginUsername').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                const rememberMe = document.getElementById('rememberMe').checked;
+
+                if (!username || !password) {
+                    showLoginError('Please enter both username and password');
+                    return;
+                }
+
+                const submitBtn = loginForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    try {
+                        const user = userManager.loginUser(username, password);
+                        
+                        if (rememberMe) {
+                            localStorage.setItem('rememberLogin', 'true');
+                        }
+
+                        showLoginSuccess(`Welcome back, ${user.fullName}! Redirecting...`);
+                        
+                        // Redirect to webhome.html after successful login
+                        setTimeout(() => {
+                            window.location.href = "webhome.html";
+                        }, 1500);
+
+                    } catch (error) {
+                        showLoginError(error.message);
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                }, 1500);
+            });
+
+            // Message display functions
+            function showLoginError(message) {
+                loginErrorMessage.textContent = message;
+                loginErrorMessage.classList.remove('d-none');
+                loginSuccessMessage.classList.add('d-none');
+                setTimeout(() => {
+                    loginErrorMessage.classList.add('d-none');
+                }, 5000);
+            }
+
+            function showLoginSuccess(message) {
+                loginSuccessMessage.textContent = message;
+                loginSuccessMessage.classList.remove('d-none');
+                loginErrorMessage.classList.add('d-none');
+            }
+
+            function showRegisterError(message) {
+                registerErrorMessage.textContent = message;
+                registerErrorMessage.classList.remove('d-none');
+                registerSuccessMessage.classList.add('d-none');
+                setTimeout(() => {
+                    registerErrorMessage.classList.add('d-none');
+                }, 5000);
+            }
+
+            function showRegisterSuccess(message) {
+                registerSuccessMessage.textContent = message;
+                registerSuccessMessage.classList.remove('d-none');
+                registerErrorMessage.classList.add('d-none');
+            }
+
+            // Check if user is already logged in
+            const currentUser = userManager.getCurrentUser();
+            if (currentUser && localStorage.getItem('rememberLogin')) {
+                window.location.href = "webhome.html";
+            }
+
+            // Display registered users count (for demo purposes)
+            console.log(`Total registered users: ${userManager.users.length}`);
+            if (userManager.users.length > 0) {
+                console.log('Registered users:', userManager.users.map(u => u.username));
+            }
+        });
+    </script>
+</body>
+</html>

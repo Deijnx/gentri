@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Website</title>
+    <link rel="stylesheet" href="loading.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="govt-loading-screen" id="loadingScreen">
+        <div class="loading-container">
+            <div class="logo-container">
+                <img src="https://generaltrias.gov.ph/wp-content/uploads/2023/06/cropped-GT-Favicon-32x32.png" alt="City Seal" class="city-seal">
+                <div class="logo-text">
+                    <h1>CITY OF GENERAL TRIAS</h1>
+                    <p>OFFICIAL GOVERNMENT WEBSITE</p>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="circular-progress">
+                    <div class="progress-circle">
+                        <div class="progress-bar"></div>
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">0%</div>
+                </div>
+                <p class="loading-message">Loading official website content...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="mainContent" style="display: none;">
+        <h1>Welcome to the Official Website</h1>
+        <p>Main content will appear here once loaded.</p>
+    </div>
+
+    <script> document.addEventListener('DOMContentLoaded', function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const mainContent = document.getElementById('mainContent');
+        const progressText = document.querySelector('.progress-text');
+        const progressFill = document.querySelector('.progress-fill');
+        
+        // Simulate loading progress
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 10;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                
+                // Complete loading
+                progressText.textContent = '100%';
+                
+                // Hide loading screen after a short delay
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        mainContent.style.display = 'block';
+                    }, 500);
+                }, 500);
+            } else {
+                progressText.textContent = Math.round(progress) + '%';
+                
+                // Update progress fill rotation
+                const rotation = 45 + (progress * 3.6);
+                progressFill.style.transform = `rotate(${rotation}deg)`;
+                
+                // Change color when nearing completion
+                if (progress > 80) {
+                    progressFill.style.borderTopColor = '#198754';
+                    progressFill.style.borderRightColor = '#198754';
+                    progressText.style.color = '#198754';
+                }
+            }
+        }, 150);
+        
+        // Fallback in case of issues
+        setTimeout(() => {
+            if (loadingScreen.style.display !== 'none') {
+                clearInterval(interval);
+                progressText.textContent = '100%';
+                progressFill.style.transform = 'rotate(405deg)';
+                progressFill.style.borderTopColor = '#198754';
+                progressFill.style.borderRightColor = '#198754';
+                progressText.style.color = '#198754';
+                
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                }, 500);
+            }
+        }, 5000);
+    });
+    </script>
+</body>
+</html>
